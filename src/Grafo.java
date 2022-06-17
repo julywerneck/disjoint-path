@@ -55,30 +55,30 @@ public class Grafo {
         void findDisjointPaths() {
             Stack<Aresta> stack = new Stack<Aresta>();
             Stack<Aresta> temp = new Stack<Aresta>();
-            int origem = 0;
-            stack.push(s.adj.get(origem));
+            int origemIndex = 0;
+            stack.push(s.adj.get(origemIndex));
             while (!stack.isEmpty()) {
                 Aresta edge = stack.pop();
                 Vertice current = edge.destino;
                 edge.fluxo = 0;
                 temp.push(edge);
-                for (Aresta e : current.adj) {
-                    if (e.fluxo > 0) {
-                        if (e.destino.nome == 5) {
-                            temp.push(e);
+                for (Aresta i : current.adj) {
+                    if (i.fluxo > 0) {
+                        if (i.destino.nome == t.nome) {
+                            temp.push(i);
                             setSize(1);
-                            for (Aresta i : temp) {
-                                addPath(i);
+                            for (Aresta j : temp) {
+                                addPath(j);
                             }
                             temp.clear();
                             stack.clear();
-                            e.fluxo = 0;
-                            origem += 1;
-                            if (origem < s.adj.size()) {
-                                stack.push(s.adj.get(origem));
+                            i.fluxo = 0;
+                            origemIndex += 1;
+                            if (origemIndex < s.adj.size()) {
+                                stack.push(s.adj.get(origemIndex));
                             }
                         } else {
-                            stack.push(e);
+                            stack.push(i);
                         }
                     }
                 }
